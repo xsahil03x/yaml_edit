@@ -22,8 +22,8 @@ jobs:
       matrix:
         sdk: [dev]
     steps:
-      - uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332
-      - uses: dart-lang/setup-dart@0a8a0fc875eb934c15d08629302413c671d3f672
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+      - uses: dart-lang/setup-dart@e630b99d28a3b71860378cafdc2a067c71107f94
         with:
           sdk: ${{ matrix.sdk }}
       - id: install
@@ -50,8 +50,8 @@ jobs:
         sdk: ['3.1', stable, dev]
         platform: [vm, chrome]
     steps:
-      - uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332
-      - uses: dart-lang/setup-dart@0a8a0fc875eb934c15d08629302413c671d3f672
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+      - uses: dart-lang/setup-dart@e630b99d28a3b71860378cafdc2a067c71107f94
         with:
           sdk: ${{ matrix.sdk }}
       - id: install
@@ -64,7 +64,7 @@ jobs:
       - name: Convert coverage to lcov
         run: dart run coverage:format_coverage -i ./coverage -o ./coverage/lcov.info --lcov --report-on lib/
         if: always() && steps.install.outcome == 'success' && matrix.sdk != '2.12.0'
-      - uses: coverallsapp/github-action@643bc377ffa44ace6394b2b5d0d3950076de9f63
+      - uses: coverallsapp/github-action@648a8eb78e6d50909eff900e4ec85cab4524a45b
         if: always() && steps.install.outcome == 'success' && matrix.sdk != '2.12.0'
         with:
           flag-name: os:${{ matrix.os }}/dart:${{ matrix.sdk }}/platform:${{ matrix.platform }}
@@ -75,6 +75,6 @@ jobs:
     if: ${{ always() }}
     runs-on: ubuntu-latest
     steps:
-    - uses: coverallsapp/github-action@643bc377ffa44ace6394b2b5d0d3950076de9f63
+    - uses: coverallsapp/github-action@648a8eb78e6d50909eff900e4ec85cab4524a45b
       with:
         parallel-finished: true
